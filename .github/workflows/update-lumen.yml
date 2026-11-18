@@ -15,8 +15,8 @@ concurrency:
 
 env:
   REPO: flaviodelgrosso/lumen
-  TAP: flaviodelgrosso/formulae
-  FORMULA: lumen.rb
+  TAP: flaviodelgrosso/tap
+  FORMULA: Formula/lumen.rb
 
 jobs:
   update:
@@ -136,7 +136,7 @@ jobs:
           export HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ANALYTICS=1
           brew tap "$TAP"
           tapdir=$(brew tap-info --json "$TAP" | jq -r '.[0].path')
-          cp "$FORMULA" "$tapdir/lumen.rb"
+          cp "$FORMULA" "$tapdir/Formula/lumen.rb"
           brew audit --strict --online "$TAP/lumen"
           brew install "$TAP/lumen"
           brew test "$TAP/lumen"
